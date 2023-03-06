@@ -29,27 +29,27 @@ class PrimaryBottomNavigationBar extends StatelessWidget {
       unselectedLabelStyle: AppTextStyle.body1,
       showUnselectedLabels: true,
       items: [
-        // BottomNavigationBarItem(
-        //   label: 'Home',
-        //   icon: _buildImageIcon(AppAsset.homeFill),
-        //   activeIcon: _buildImageIcon(AppAsset.home),
-        // ),
-        // BottomNavigationBarItem(
-        //   label: 'My Appointment',
-        //   icon: _buildImageIcon(AppAsset.myAppointment),
-        //   activeIcon: _buildImageIcon(AppAsset.myAppointmentFill),
-        // ),
-        // BottomNavigationBarItem(
-        //   label: 'My Order',
-        //
-        //   icon: _buildImageIcon(AppAsset.order),
-        //   activeIcon: _buildImageIcon(AppAsset.orderFill),
-        // ),
-        // BottomNavigationBarItem(
-        //   label: 'Services',
-        //   icon: _buildImageIcon(AppAsset.service),
-        //   activeIcon: _buildImageIcon(AppAsset.serviceFill),
-        // ),
+        BottomNavigationBarItem(
+          label: 'Home',
+          icon: _buildImageIcon(AppAsset.home),
+          activeIcon: _buildImageIcon(AppAsset.homeFill),
+        ),
+        BottomNavigationBarItem(
+          label: 'Post ad',
+          icon: _buildImageIcon(AppAsset.plus),
+          activeIcon: _buildImageIcon(AppAsset.plusFill),
+        ),
+        BottomNavigationBarItem(
+          label: 'Wallet',
+
+          icon: _buildImageIcon(AppAsset.wallet),
+          activeIcon: _buildImageIcon(AppAsset.walletFill),
+        ),
+        BottomNavigationBarItem(
+          label: 'Profile',
+          icon: _buildImageIcon(AppAsset.user),
+          activeIcon: _buildImageIcon(AppAsset.userFill),
+        ),
       ],
     );
   }

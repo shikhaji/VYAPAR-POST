@@ -89,9 +89,10 @@ class _LoginScreenState extends State<LoginScreen> with ValidationMixin{
                 lable: "Login",
                 onPressed: (){
               if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(context, Routs.updateProfileScreen,
+                Navigator.pushNamed(context, Routs.mainHomeScreen,
                 arguments: SendArguments(
-                phoneNumber:_phone.text.trim()
+                  bottomIndex: 0,
+                // phoneNumber:_phone.text.trim()
                 ) );
               }
 

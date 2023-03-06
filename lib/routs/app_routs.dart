@@ -8,9 +8,14 @@ import 'package:vyapar_post/views/Auth/mobile_verification_screen.dart';
 import 'package:vyapar_post/views/Auth/otp_verification_screen.dart';
 import 'package:vyapar_post/views/Auth/signup_screen.dart';
 import 'package:vyapar_post/views/Auth/update_profile_screen.dart';
+import 'package:vyapar_post/views/Dashboard/main_home_screen.dart';
+import 'package:vyapar_post/views/Dashboard/post_ad_Screen.dart';
+import 'package:vyapar_post/views/Dashboard/profile_screen.dart';
+import 'package:vyapar_post/views/Dashboard/wallet_screen.dart';
 import 'package:vyapar_post/views/Splash/on_boarding_screen.dart';
 import 'package:vyapar_post/views/Splash/splash_screen.dart';
 
+import '../views/Dashboard/home_screen.dart';
 import '../views/example.dart';
 import 'arguments.dart';
 
@@ -25,6 +30,11 @@ class Routs {
   static const String otpVerificationScreen = "/otp_verification_screen";
   static const String splashScreen = "/splash_screen";
   static const String onBoardingScreen = "/on_boarding_screen";
+  static const String mainHomeScreen = "/main_home_screen";
+  static const String homeScreen = "/home_screen";
+  static const String postAdScreen = "/post_ad_screen";
+  static const String walletScreen = "/wallet_screen";
+  static const String profileScreen = "/profile_screen";
 
 }
 
@@ -63,7 +73,20 @@ class RoutGenerator {
       case Routs.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
 
+      case Routs.mainHomeScreen:
+        return MaterialPageRoute(builder: (_) => MainHomeScreen( arguments: arguments as SendArguments,));
 
+      case Routs.homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+      case Routs.postAdScreen:
+        return MaterialPageRoute(builder: (_) => const PostAdScreen());
+
+      case Routs.walletScreen:
+        return MaterialPageRoute(builder: (_) => const WalletScreen());
+
+      case Routs.profileScreen:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
 
 

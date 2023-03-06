@@ -20,6 +20,13 @@ class AppAsset {
 
   //BOTTOM IMAGE
   static const String home = "${iconPath}home.png";
+  static const String homeFill = "${iconPath}home_fill.png";
+  static const String plus = "${iconPath}new.png";
+  static const String plusFill = "${iconPath}new_fill.png";
+  static const String user = "${iconPath}user.png";
+  static const String userFill = "${iconPath}user_fill.png";
+  static const String walletFill = "${iconPath}wallet_fill.png";
+  static const String wallet = "${iconPath}wallet.png";
 
 
   //HOME PAGE
