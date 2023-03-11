@@ -17,6 +17,10 @@ class AppAsset {
   //onboarding screen3
   static const String obs3 = "${imagePath}obs7.jpg";
 
+  //post image
+  static const String post = "${imagePath}post.png";
+  static const String postImage = "${imagePath}post_img.jpg";
+
 
   //BOTTOM IMAGE
   static const String home = "${iconPath}home.png";
@@ -27,6 +31,18 @@ class AppAsset {
   static const String userFill = "${iconPath}user_fill.png";
   static const String walletFill = "${iconPath}wallet_fill.png";
   static const String wallet = "${iconPath}wallet.png";
+  static const String heart = "${iconPath}heart.png";
+  static const String heartFill = "${iconPath}heart_fill.png";
+  static const String comment = "${iconPath}comment.png";
+  static const String share = "${iconPath}share.png";
+  static const String whatsApp = "${iconPath}whatsapp.png";
+  static const String call = "${iconPath}call.png";
+  static const String postImg = "${imagePath}post_img.jpg";
+
+  //APPBAR ICON
+
+  static const String menu = "${iconPath}menu.png";
+  static const String menuFill = "${iconPath}menu_fill.png";
 
 
   //HOME PAGE

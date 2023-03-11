@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vyapar_post/utils/app_asset.dart';
+import 'package:vyapar_post/utils/app_text_style.dart';
 import 'package:vyapar_post/views/Dashboard/post_ad_Screen.dart';
 import 'package:vyapar_post/views/Dashboard/profile_screen.dart';
 import 'package:vyapar_post/views/Dashboard/wallet_screen.dart';
 import 'package:vyapar_post/widget/scroll_view.dart';
 
 import '../../routs/arguments.dart';
+import '../../utils/app_color.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/screen_utils.dart';
 import '../../widget/drawer_widget.dart';
@@ -43,19 +46,33 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       builder: (context, currentIndex, child) {
         return Scaffold(
           key: _scaffoldKey,
+          // appBar: AppBar(
+          //   backgroundColor: AppColor.white,
+          //   elevation: 0.0,
+          //   title: Text("Vyapar Post",style: AppTextStyle.appBarTextTitle ,),
+          //   // actions: [
+          //   //   Padding(
+          //   //     padding: const EdgeInsets.all(8.0),
+          //   //     child: Icon(
+          //   //         Icons.menu
+          //   //     ),
+          //   //   )
+          //   // ],
+          // ),
+
           body: _buildBody(currentIndex),
-          drawer: Drawer(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            width: ScreenUtil().screenWidth * 0.8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(Sizes.s20.r),
-                bottomRight: Radius.circular(Sizes.s20.r),
-              ),
-            ),
-            child: const DrawerWidget(),
-          ),
+          // drawer: Drawer(
+          //   backgroundColor: Colors.white,
+          //   elevation: 0,
+          //   width: ScreenUtil().screenWidth * 0.8,
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.only(
+          //       topRight: Radius.circular(Sizes.s20.r),
+          //       bottomRight: Radius.circular(Sizes.s20.r),
+          //     ),
+          //   ),
+          //   child: const DrawerWidget(),
+          // ),
 
           bottomNavigationBar: PrimaryBottomNavigationBar(
             currentIndex: currentIndex,

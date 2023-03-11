@@ -18,4 +18,6 @@ class AppColor {
   static const Color lightOrange = Color(0x66ff9966);
   static const Color green = Color(0xff00A355);
   static const Color textFieldColor = Color(0xffEEF2F6);
+  static const Color drawerBackground = Color(0xcc487bc4);
+  static const Color postBackground = Color(0xccc6d5ef);
 }
