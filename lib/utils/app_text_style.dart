@@ -22,7 +22,7 @@ class AppTextStyle {
   static const TextStyle textFieldFont = TextStyle(
       fontSize: Sizes.s16, fontWeight: FontWeight.w900, color: AppColor.black);
   static const TextStyle bigTextTile =
-  TextStyle(fontSize: Sizes.s34, fontWeight: FontWeight.w900);
+  TextStyle(fontSize: Sizes.s24, fontWeight: FontWeight.w900);
   static const TextStyle subTitle2 =
   TextStyle(fontSize: Sizes.s14, fontWeight: FontWeight.w400);
   static const TextStyle body1 =
@@ -37,7 +37,7 @@ class AppTextStyle {
   static const TextStyle buttonTextStyle = TextStyle(
       fontSize: Sizes.s16, fontWeight: FontWeight.bold, color: AppColor.white);
   static const TextStyle appBarTitle = TextStyle(
-      fontSize: Sizes.s24, fontWeight: FontWeight.bold, color: AppColor.white);
+      fontSize: Sizes.s18, fontWeight: FontWeight.w500, color: AppColor.black);
   static const TextStyle redTextStyle = TextStyle(
     fontSize: Sizes.s16,
     fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class AppTextStyle {
   TextStyle(fontSize: Sizes.s20, fontWeight: FontWeight.w900);
 
   static const TextStyle timeTitle = TextStyle(
-      fontSize: Sizes.s18, fontWeight: FontWeight.w700, color: AppColor.white);
+      fontSize: Sizes.s20, fontWeight: FontWeight.w900, color: AppColor.white);
 
   static const TextStyle headingTextTile =
   TextStyle(fontSize: Sizes.s18, fontWeight: FontWeight.w900);

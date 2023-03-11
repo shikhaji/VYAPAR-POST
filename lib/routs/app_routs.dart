@@ -11,6 +11,7 @@ import 'package:vyapar_post/views/Auth/update_profile_screen.dart';
 import 'package:vyapar_post/views/Dashboard/main_home_screen.dart';
 import 'package:vyapar_post/views/Dashboard/post_ad_Screen.dart';
 import 'package:vyapar_post/views/Dashboard/profile_screen.dart';
+import 'package:vyapar_post/views/Dashboard/subscription_plan_screen.dart';
 import 'package:vyapar_post/views/Dashboard/wallet_screen.dart';
 import 'package:vyapar_post/views/Splash/on_boarding_screen.dart';
 import 'package:vyapar_post/views/Splash/splash_screen.dart';
@@ -35,6 +36,7 @@ class Routs {
   static const String postAdScreen = "/post_ad_screen";
   static const String walletScreen = "/wallet_screen";
   static const String profileScreen = "/profile_screen";
+  static const String subscriptionPlanScreen = "/subscription_plan_screen";
 
 }
 
@@ -87,6 +89,9 @@ class RoutGenerator {
 
       case Routs.profileScreen:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
+
+      case Routs.subscriptionPlanScreen:
+        return MaterialPageRoute(builder: (_) => const SubscriptionPlanScreen());
 
 
 
