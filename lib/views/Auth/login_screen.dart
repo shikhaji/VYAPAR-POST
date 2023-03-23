@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vyapar_post/utils/app_color.dart';
@@ -13,6 +14,7 @@ import 'package:vyapar_post/widget/primary_textfield.dart';
 
 import '../../routs/app_routs.dart';
 import '../../routs/arguments.dart';
+import '../../services/api_services.dart';
 import '../../widget/scroll_view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -89,11 +91,31 @@ class _LoginScreenState extends State<LoginScreen> with ValidationMixin{
                 lable: "Login",
                 onPressed: (){
               if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(context, Routs.mainHomeScreen,
-                arguments: SendArguments(
-                  bottomIndex: 0,
-                // phoneNumber:_phone.text.trim()
-                ) );
+                FormData data() {
+                  print(_phone.text.trim());
+                  print(_password.text.trim());
+                  return FormData.fromMap({
+                    "contact":_phone.text.trim(),
+                    "password": _password.text.trim(),
+                  });
+                }
+                ApiService().login(context,data:data()).then((value){
+                      if(value?.branchKycStatus == "0"){
+                        Navigator.pushNamed(context, Routs.updateProfileScreen,
+                            arguments: SendArguments(
+                              phoneNumber:_phone.text.trim()
+
+                            ) );
+                      }else{
+                        Navigator.pushNamed(context, Routs.mainHomeScreen,
+                            arguments: SendArguments(
+                              // phoneNumber:_phone.text.trim()
+                                bottomIndex: 0
+                            ) );
+                      }
+
+                });
+
               }
 
                 }),

@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:vyapar_post/widget/custom_sized_box.dart';
 import 'package:vyapar_post/widget/post_view.dart';
 
+import '../../models/get_all_category_model.dart';
+import '../../models/get_all_post_model.dart';
+import '../../services/api_services.dart';
 import '../../utils/app_asset.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_sizes.dart';
@@ -20,11 +25,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<AllPost> getAllPostData=[];
+  List<GetCategory> getCategoryData=[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetAllPost();
+    GetAllCategory();
+  }
+  Future GetAllPost() async {
+    ApiService().getAllPost(context).then((value){
+      setState(() {
+        getAllPostData=value!.message.allPost;
+      });
+
+    });
+  }
+
+  Future GetAllCategory() async {
+    ApiService().getAllCatgory(context).then((value){
+      setState(() {
+        getCategoryData=value!.message!.category!;
+      });
+      print("print length = ${getCategoryData.length}");
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          )
+        ],
         backgroundColor: AppColor.white,
         elevation: 0.0,
         title: Text("Vyapar Post",style: AppTextStyle.appBarTextTitle ,),
@@ -46,61 +85,48 @@ class _HomeScreenState extends State<HomeScreen> {
      body: SingleChildScrollView(
        child: Column(
          children: [
-           const Text("Post by Categorise",style: AppTextStyle.appBarTitle,),
-           SizedBoxH14(),
-           Column(
-             children: [
-               SingleChildScrollView(
-                 scrollDirection: Axis.horizontal,
-                 child: Row(
-                   children: [
-                      for(int i = 0; i < 5; i++)
-                        Container(
-                          height: 90,
-                          width: 90,
-                          margin: EdgeInsets.only(right: 10),
-                          child: Column(
-                            children: [
-                              ListView.builder(
-                                padding: EdgeInsets.symmetric(vertical: Sizes.s10.h),
-                                shrinkWrap: true,
-                                // physics: const NeverScrollableScrollPhysics(),
-                                itemCount: 1,
-                                itemBuilder: (context, inx) {
-                                  return CetegoryList(
-                                    // image:AppAsset.postImg,
-                                    // name:"vidhi",
-                                    // post: AppAsset.postImg,
+           Divider(),
+           Padding(
+             padding: const EdgeInsets.only(left: 8,right: 8),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 const Text("Post by Category",style: AppTextStyle.appBarTitle,),
+                 SizedBoxH10(),
+                 SingleChildScrollView(
+                   scrollDirection: Axis.horizontal,
+                   child: Row(
+                     children: List.generate(getCategoryData.length, (index){
+                       return CetegoryList(
+                         image:AppAsset.postImg,
+                        name: "${getCategoryData[index].brandName}",
+                       );
+                     }),
 
 
-                                  );
-
-
-                                },
-
-                              ),
-
-                            ],
-                          ),
-                        )
-                   ],
+                   ),
                  ),
-               )
-             ],
+               ],
+             ),
            ),
+           Divider(),
+           SizedBoxH14(),
+
 
            Column(
              children: [
+
                ListView.builder(
                  padding: EdgeInsets.symmetric(vertical: Sizes.s20.h),
                  shrinkWrap: true,
                  physics: const NeverScrollableScrollPhysics(),
-                 itemCount: 8,
+                 itemCount: getAllPostData.length,
                  itemBuilder: (context, inx) {
                    return PostList(
                      image:AppAsset.postImg,
-                     name:"vidhi",
+                     name:getAllPostData[inx].vapTitle,
                      post: AppAsset.postImg,
+                    // post: getAllPostData[inx].vapImage,
 
 
                    );
@@ -211,14 +237,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   }
   
-  Widget CetegoryList(){
-    return Container(
-      height: 30,
-      width: 30,
+  Widget CetegoryList({
+    required String image,
+    required String name,
+}){
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
       child: Column(
         children: [
-          Image.asset(AppAsset.post,height:10,fit: BoxFit.fill,),
-          Text("Store ")
+          Container(
+            height:80,
+            width: 105,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              color: Colors.grey,
+            ),
+            child: Image.asset(image),
+          ),
+          SizedBoxH8(),
+          Text(name)
         ],
       ),
     );

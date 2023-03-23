@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/get_current_balance.dart';
 import '../../routs/app_routs.dart';
+import '../../services/api_services.dart';
+import '../../services/shared_preferences.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/app_text_style.dart';
@@ -23,7 +27,34 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen> {
   final TextEditingController _amountController = TextEditingController();
+  late String loginId ;
+  String? balance;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetCurrentBalance();
+  }
+  Future<void> GetCurrentBalance()async {
+    String? id = await Preferances.getString("userId");
+    setState(() {
+      loginId = id!;
+    });
+    FormData data() {
+      print(id!.replaceAll('"', '').replaceAll('"', '').toString());
+      return FormData.fromMap({
+        "loginid" : id!.replaceAll('"', '').replaceAll('"', '').toString(),
+      });
+    }
 
+    ApiService().getCurrentBalance(context,data:data()).then((value){
+      setState(() {
+        balance = value!.balance;
+      });
+    });
+
+
+    }
 
   @override
   Widget build(BuildContext context){
@@ -34,7 +65,7 @@ class _WalletScreenState extends State<WalletScreen> {
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
   SizedBoxH28(),
-  orderListContainer("850"),
+  orderListContainer(balance),
   SizedBoxH28(),
 
   Padding(
@@ -142,7 +173,18 @@ class _WalletScreenState extends State<WalletScreen> {
   SizedBoxH28(),
   PrimaryButton(
   lable: 'continue',
-  onPressed: () {  },
+  onPressed: () {
+    FormData data() {
+    print("loginId = $loginId");
+    return FormData.fromMap({
+      "loginid" : loginId,
+      "transactionid" : "123",
+      "cwt_amount" : _amountController.text.trim(),
+      "payment_type" : 1,
+    });
+    }
+    ApiService().updateProfile(context,data:data());
+  },
   ),
   ],
   ),
@@ -200,5 +242,6 @@ Widget orderListContainer(String? balance,) {
     ),
   );
 }
+
 }
 

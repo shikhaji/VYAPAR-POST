@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vyapar_post/routs/arguments.dart';
 import 'package:vyapar_post/utils/validation_mixin.dart';
 
 import '../../routs/app_routs.dart';
+import '../../services/api_services.dart';
+import '../../services/shared_preferences.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
 import '../../widget/custom_sized_box.dart';
@@ -26,7 +29,21 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> with Valida
   TextEditingController _confirmPassword = TextEditingController();
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
+  late String loginId;
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  Future getData() async {
+    String? id = await Preferances.getString("userId");
+    setState(() {
+      loginId = id!;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,41 +63,42 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> with Valida
             SizedBoxH6(),
             appText("create a new password",style: AppTextStyle.subTitle),
             SizedBoxH10(),
-            appText("Password",style: AppTextStyle.lable),
+            appText("old Password",style: AppTextStyle.lable),
             SizedBoxH8(),
             PrimaryTextField(
               controller: _password,
-              hintText: "enter password",
+              hintText: "enter old password",
               prefix: Icon(Icons.password),
               validator: passwordValidator,
               suffix: GestureDetector(
-                  onTap: (){
-                    setState(() {
-                      obscurePassword= !obscurePassword;
-                    });
-                  },
+                  // onTap: (){
+                  //   setState(() {
+                  //     obscurePassword= !obscurePassword;
+                  //   });
+                  // },
                   child: obscurePassword ? Icon(Icons.visibility_off) : Icon(Icons.visibility)),
-              obscureText: obscurePassword,
+              // obscureText: obscurePassword,
             ),
             SizedBoxH10(),
-            appText("Confirm Password",style: AppTextStyle.lable),
+            appText("new Password",style: AppTextStyle.lable),
             SizedBoxH8(),
             PrimaryTextField(
               controller: _confirmPassword,
-              hintText: "Re-enter password",
+              hintText: "Enter new password",
               prefix: Icon(Icons.password),
-              validator: (value){
-                return confirmPasswordValidator(value!,_password.text.trim());
-              },
+              validator:passwordValidator,
+              //     (value){
+              //   return confirmPasswordValidator(value!,_password.text.trim());
+              // },
 
               suffix: GestureDetector(
-                 onTap: (){
-                   setState(() {
-                     obscureConfirmPassword= !obscureConfirmPassword;
-                   });
-                 },
+                 // onTap: (){
+                 //   setState(() {
+                 //     obscureConfirmPassword= !obscureConfirmPassword;
+                 //   });
+                 // },
                   child: obscureConfirmPassword ? Icon(Icons.visibility_off) : Icon(Icons.visibility)),
-              obscureText: obscureConfirmPassword,
+              // obscureText: obscureConfirmPassword,
             ),
 
             SizedBoxH10(),
@@ -89,7 +107,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> with Valida
                 lable: "Reset",
                 onPressed: (){
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, Routs.loginScreen);
+                    ApiService().forgetPassword(context,data:data());
+
+                    // Navigator.pushNamed(context, Routs.loginScreen);
                   }
 
 
@@ -102,4 +122,15 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> with Valida
     );
 
   }
+  FormData data() {
+    return FormData.fromMap({
+
+      "new_password": _password.text.trim(),
+      "old_password": _confirmPassword.text.trim(),
+      "loginid": loginId,
+
+
+    });
+  }
+
 }

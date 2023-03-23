@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vyapar_post/services/api_services.dart';
 import 'package:vyapar_post/utils/app_text.dart';
 import 'package:vyapar_post/utils/function.dart';
 import 'package:vyapar_post/utils/validation_mixin.dart';
@@ -28,6 +30,8 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
   TextEditingController _password = TextEditingController();
   TextEditingController _confirmPassword = TextEditingController();
   TextEditingController _name = TextEditingController();
+  TextEditingController _emailid = TextEditingController();
+  TextEditingController _rcode = TextEditingController();
   bool obscurePassword = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -40,8 +44,7 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBoxH34(),
-            SizedBoxH34(),
-            SizedBoxH34(),
+            SizedBoxH14(),
             Center(
                 child: appText("Vyapar Post",style: AppTextStyle.appName)),
             SizedBoxH10(),
@@ -59,6 +62,15 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
               prefix: Icon(Icons.person),
               keyboardInputType: TextInputType.text,
             ),
+            appText("Email-id",style: AppTextStyle.lable),
+            SizedBoxH8(),
+            PrimaryTextField(
+              controller: _emailid,
+              hintText: "enter your email",
+              validator: emailValidator,
+              prefix: Icon(Icons.email),
+              keyboardInputType: TextInputType.text,
+            ),
             SizedBoxH10(),
             appText("Phone number",style: AppTextStyle.lable),
             SizedBoxH8(),
@@ -68,6 +80,15 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
               readOnly: true,
               prefix: Icon(Icons.phone),
               keyboardInputType: TextInputType.phone,
+            ),
+            appText("Reference code",style: AppTextStyle.lable),
+            SizedBoxH8(),
+            PrimaryTextField(
+              controller: _rcode,
+              hintText: "enter reference code",
+              validator: otpValidator,
+              prefix: Icon(Icons.password_outlined),
+              keyboardInputType: TextInputType.text,
             ),
             SizedBoxH10(),
             appText("Password",style: AppTextStyle.lable),
@@ -118,7 +139,12 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
                 lable: "Sign Up",
                 onPressed: (){
                   if (_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, Routs.loginScreen);
+                    print("name=${_name.text.trim()}");
+                    print("contact=${widget.arguments?.phoneNumber}");
+                    print("email=${_emailid.text.trim()}");
+                    print("password=${_password.text.trim()}");
+                    print("referal_code=${_rcode.text.trim()}");
+                    ApiService().signUp(context,data:data());
                     }
 
 
@@ -129,5 +155,15 @@ class _SignupScreenState extends State<SignupScreen> with ValidationMixin{
         ),
       ),
     );
+  }
+  FormData data() {
+    return FormData.fromMap({
+      "name": _name.text.trim(),
+      "contact": widget.arguments?.phoneNumber,
+      "email": _emailid.text.trim(),
+      "password": _password.text.trim(),
+      "referal_code": _rcode.text.trim(),
+
+    });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,10 @@ import 'package:vyapar_post/utils/app_color.dart';
 import 'package:vyapar_post/widget/primary_button.dart';
 import 'package:vyapar_post/widget/scroll_view.dart';
 
+
+import '../models/profile_contant_model.dart';
+import '../services/api_services.dart';
+import '../services/shared_preferences.dart';
 import '../utils/app_asset.dart';
 import '../utils/app_sizes.dart';
 import '../utils/app_text_style.dart';
@@ -18,6 +23,36 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  late String loginId ;
+  Profile? getProfileData;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ProfileContant();
+  }
+  Future<void> ProfileContant() async {
+    String? id = await Preferances.getString("userId");
+    setState(() {
+      loginId = id!;
+    });
+    FormData data() {
+      print(id!.replaceAll('"', '').replaceAll('"', '').toString());
+      return FormData.fromMap({
+        "loginid" : id!.replaceAll('"', '').replaceAll('"', '').toString(),
+      });
+    }
+
+    ApiService().profileContant(context,data:data()).then((value) {
+      setState(() {
+        getProfileData = value!.message!.profile;
+      });
+    }
+    );
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -153,12 +188,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 //         ))),
                 ScreenUtil().setVerticalSpacing(10),
                 Text(
-                  "Vidhi patel",
+                  getProfileData!.bRANCHNAME!,
                   style: AppTextStyle.appBarTextTitle
                       .copyWith(color: AppColor.white),
                 ),
                 Text(
-                  "vidhi12@gmail.com",
+                    getProfileData!.bRANCHEMAIL!,
                   style: AppTextStyle.lable.copyWith(color: AppColor.white),
                 )
               ],

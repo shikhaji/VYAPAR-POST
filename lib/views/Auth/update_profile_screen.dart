@@ -1,9 +1,14 @@
+
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vyapar_post/services/shared_preferences.dart';
 import 'package:vyapar_post/utils/validation_mixin.dart';
 
 import '../../routs/app_routs.dart';
 import '../../routs/arguments.dart';
+import '../../services/api_services.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
 import '../../widget/custom_sized_box.dart';
@@ -30,8 +35,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> with Validati
   TextEditingController _businesscategory = TextEditingController();
   TextEditingController _emailid = TextEditingController();
   bool obscurePassword = true;
+  late String loginId ;
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
 
+  Future getData() async {
+     String? id = await Preferances.getString("userId");
+     setState(() {
+       loginId = id!;
+     });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,8 +140,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> with Validati
                 lable: "submit",
                 onPressed: (){
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, Routs.loginScreen);
-                  }
+                    ApiService().updateProfile(context,data:data());                  }
 
 
 
@@ -136,5 +153,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> with Validati
         ),
       ),
     );
+  }
+  FormData data() {
+    print("loginId = $loginId");
+    return FormData.fromMap({
+      "business_name": _businessname.text.trim(),
+      "business_category": _businesscategory.text.trim(),
+      "business_address": _businessaddress.text.trim(),
+      "phone": widget.arguments?.phoneNumber,
+      "email": _emailid.text.trim(),
+      "state": _state.text.trim(),
+      "city": _city.text.trim(),
+      "loginid": loginId,
+      "status": "1",
+    });
   }
 }
