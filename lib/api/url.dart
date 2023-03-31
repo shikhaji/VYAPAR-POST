@@ -16,5 +16,7 @@ class EndPoints {
   static const String getCity = '$baseUrl/get_district';
   static const String myTransaction = '$baseUrl/my_transaction';
   static const String getPlan = '$baseUrl/get_plans';
+  static const String addPost = '$baseUrl/add_post';
+  static const String verifyMobile = '$baseUrl/verify_mobile';
 
 }

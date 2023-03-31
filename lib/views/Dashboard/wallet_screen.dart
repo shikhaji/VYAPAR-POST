@@ -27,7 +27,7 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen> {
   final TextEditingController _amountController = TextEditingController();
-  late String loginId ;
+  late String loginId;
   String? balance;
   @override
   void initState() {
@@ -35,7 +35,8 @@ class _WalletScreenState extends State<WalletScreen> {
     super.initState();
     GetCurrentBalance();
   }
-  Future<void> GetCurrentBalance()async {
+
+  Future<void> GetCurrentBalance() async {
     String? id = await Preferances.getString("userId");
     setState(() {
       loginId = id!;
@@ -43,205 +44,210 @@ class _WalletScreenState extends State<WalletScreen> {
     FormData data() {
       print(id!.replaceAll('"', '').replaceAll('"', '').toString());
       return FormData.fromMap({
-        "loginid" : id!.replaceAll('"', '').replaceAll('"', '').toString(),
+        "loginid": id!.replaceAll('"', '').replaceAll('"', '').toString(),
       });
     }
 
-    ApiService().getCurrentBalance(context,data:data()).then((value){
+    ApiService().getCurrentBalance(context, data: data()).then((value) {
       setState(() {
         balance = value!.balance;
       });
     });
-
-
-    }
+  }
 
   @override
-  Widget build(BuildContext context){
-  return Scaffold(
-  backgroundColor: AppColor.white,
-  body: SafeArea(
-  child: CustomScroll(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-  SizedBoxH28(),
-  orderListContainer(balance),
-  SizedBoxH28(),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.white,
+      body: SafeArea(
+          child: CustomScroll(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBoxH28(),
+          orderListContainer(balance),
+          SizedBoxH28(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: Container(
+              padding: EdgeInsets.all(12),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black12)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBoxH10(),
+                  Text(
+                    "Add Amount",
+                    style: AppTextStyle.appBarTextTitle,
+                  ),
+                  SizedBoxH20(),
 
-  Padding(
-  padding: EdgeInsets.symmetric(horizontal: 12),
-  child: Container(
-  padding: EdgeInsets.all(12),
-  width: double.infinity,
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(12),
-  border: Border.all(color: Colors.black12)),
-  child: Column(
-  mainAxisAlignment: MainAxisAlignment.start,
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-  SizedBoxH10(),
-  Text(
-  "Add Amount",
-  style: AppTextStyle.appBarTextTitle,
-  ),
-  SizedBoxH20(),
+                  PrimaryTextField(
+                    controller: _amountController,
+                    hintText: "Enter Amount",
+                    prefix: const Icon(Icons.currency_rupee),
+                    textInputAction: TextInputAction.next,
+                    keyboardInputType: TextInputType.phone,
+                  ),
+                  // TextFormField(
+                  //     obscureText: true,
+                  //     style: TextStyle(fontSize: 16),
+                  //     controller: _amountController,
+                  //     textInputAction: TextInputAction.next,
+                  //     decoration: InputDecoration(
+                  //       hintText: "Enter amount",
+                  //
+                  //       isDense: true,
+                  //       enabledBorder: OutlineInputBorder(
+                  //           borderRadius:
+                  //           BorderRadius.circular(12.0),
+                  //           borderSide: BorderSide(
+                  //               width: 0.8, color: Colors.black12)),
+                  //       focusedBorder: OutlineInputBorder(
+                  //           borderRadius:
+                  //           BorderRadius.circular(8.0),
+                  //           borderSide: BorderSide(
+                  //               width: 1.5, color: Colors.black12)),
+                  //
+                  //       //  hintStyle: CustomTextstyleTheme.inputFieldHintStyle,
+                  //     )),
 
-  PrimaryTextField(
-  controller: _amountController,
-    hintText: "Enter Amount",
-    prefix: const Icon(Icons.currency_rupee),
-    textInputAction: TextInputAction.next,
-    keyboardInputType: TextInputType.phone,
+                  SizedBoxH20(),
+                  Text(
+                    "Quick ammount",
+                    style: AppTextStyle.appBarTextTitle,
+                  ),
+                  SizedBoxH28(),
+                  amountContainer(),
+                  SizedBoxH28(),
+                  PrimaryButton(
+                    lable: 'continue',
+                    onPressed: () async {
+                      FormData data() {
+                        print("loginId = $loginId");
+                        return FormData.fromMap({
+                          "loginid": loginId,
+                          "transactionid": "123",
+                          "cwt_amount": _amountController.text.trim(),
+                          "payment_type": "2",
+                        });
+                      }
 
-
-  ),
-  // TextFormField(
-  //     obscureText: true,
-  //     style: TextStyle(fontSize: 16),
-  //     controller: _amountController,
-  //     textInputAction: TextInputAction.next,
-  //     decoration: InputDecoration(
-  //       hintText: "Enter amount",
-  //
-  //       isDense: true,
-  //       enabledBorder: OutlineInputBorder(
-  //           borderRadius:
-  //           BorderRadius.circular(12.0),
-  //           borderSide: BorderSide(
-  //               width: 0.8, color: Colors.black12)),
-  //       focusedBorder: OutlineInputBorder(
-  //           borderRadius:
-  //           BorderRadius.circular(8.0),
-  //           borderSide: BorderSide(
-  //               width: 1.5, color: Colors.black12)),
-  //
-  //       //  hintStyle: CustomTextstyleTheme.inputFieldHintStyle,
-  //     )),
-
-  SizedBoxH20(),
-  Text(
-  "Quick ammount",
-  style: AppTextStyle.appBarTextTitle,
-  ),
-  SizedBoxH28(),
-  Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-  Container(
-  padding: EdgeInsets.all(12),
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(12),
-  border:
-  Border.all(color: Colors.black12)),
-  child: FittedBox(
-  child: Text("500"),
-  ),
-  ),
-  Container(
-  padding: EdgeInsets.all(12),
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(12),
-  border:
-  Border.all(color: Colors.black12)),
-  child: FittedBox(
-  child: Text("1000"),
-  ),
-  ),
-  Container(
-  padding: EdgeInsets.all(12),
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(12),
-  border:
-  Border.all(color: Colors.black12)),
-  child: FittedBox(
-  child: Text("2000"),
-  ),
-  ),
-  Container(
-  padding: EdgeInsets.all(12),
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(12),
-  border:
-  Border.all(color: Colors.black12)),
-  child: FittedBox(
-  child: Text("2500"),
-  ),
-  )
-  ],
-  ),
-  SizedBoxH28(),
-  PrimaryButton(
-  lable: 'continue',
-  onPressed: () {
-    FormData data() {
-    print("loginId = $loginId");
-    return FormData.fromMap({
-      "loginid" : loginId,
-      "transactionid" : "123",
-      "cwt_amount" : _amountController.text.trim(),
-      "payment_type" : 1,
-    });
-    }
-    ApiService().updateProfile(context,data:data());
-  },
-  ),
-  ],
-  ),
-  ),),
-  ],
-
-  )),
-  appBar: AppBar(
-  title: Text("Wallet"),
-  ),
-    drawer: Drawer(
-    backgroundColor: Colors.white,
-    elevation: 0,
-    width: ScreenUtil().screenWidth * 0.8,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topRight: Radius.circular(Sizes.s20.r),
-        bottomRight: Radius.circular(Sizes.s20.r),
-      ),
-    ),
-    child: const DrawerWidget(),
-  ),
-
-    );
-
-}
-Widget orderListContainer(String? balance,) {
-  return Container(
-    width: double.infinity,
-    alignment: Alignment.topLeft,
-    decoration: BoxDecoration(
-        color: AppColor.primaryColor,
-        borderRadius: BorderRadius.circular(textFieldBorderRadius),
-        border: Border.all(color: AppColor.primaryColor)),
-    child: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children:  [
-          SizedBoxH10(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Balance available",style: AppTextStyle.appBarTextTitle.copyWith(color: AppColor.white)),
-              Icon(Icons.account_balance_wallet_outlined,color: AppColor.white,)
-            ],
+                      ApiService().addWallet(context, data: data());
+                      await ApiService()
+                          .getCurrentBalance(context, data: data())
+                          .then((value) {
+                        setState(() {
+                          balance = value!.balance;
+                        });
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
-
-          SizedBoxH20(),
-          Align(alignment: Alignment.topLeft,
-              child: Text("₹${balance}",style: AppTextStyle.bigTextTile.copyWith(color: AppColor.white),)),
-          SizedBoxH10(),
         ],
+      )),
+      appBar: AppBar(
+        title: Text("Wallet"),
       ),
-    ),
-  );
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        width: ScreenUtil().screenWidth * 0.8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(Sizes.s20.r),
+            bottomRight: Radius.circular(Sizes.s20.r),
+          ),
+        ),
+        child: const DrawerWidget(),
+      ),
+    );
+  }
+
+  List<AmountModel?> amountList = [
+    AmountModel(amount: "50", selected: false),
+    AmountModel(amount: "100", selected: false),
+    AmountModel(amount: "500", selected: false),
+    AmountModel(amount: "1000", selected: false),
+    AmountModel(amount: "2000", selected: false),
+  ];
+
+  Widget amountContainer() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+          children: List.generate(amountList.length, (index) {
+            return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _amountController.text = "${amountList[index]!.amount}";
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.black12)),
+                  child: Text("${amountList[index]!.amount}"),
+                ));
+          })),
+    );
+  }
+
+  Widget orderListContainer(
+    String? balance,
+  ) {
+    return Container(
+      width: double.infinity,
+      alignment: Alignment.topLeft,
+      decoration: BoxDecoration(
+          color: AppColor.primaryColor,
+          borderRadius: BorderRadius.circular(textFieldBorderRadius),
+          border: Border.all(color: AppColor.primaryColor)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBoxH10(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Balance available",
+                    style: AppTextStyle.appBarTextTitle
+                        .copyWith(color: AppColor.white)),
+                Icon(
+                  Icons.account_balance_wallet_outlined,
+                  color: AppColor.white,
+                )
+              ],
+            ),
+            SizedBoxH20(),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "₹${balance}",
+                  style:
+                      AppTextStyle.bigTextTile.copyWith(color: AppColor.white),
+                )),
+            SizedBoxH10(),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-}
 
+class AmountModel {
+  String? amount;
+  bool? selected;
+  AmountModel({this.amount, this.selected});
+}

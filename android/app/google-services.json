@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "422281471507",
+    "project_id": "vyapar-post",
+    "storage_bucket": "vyapar-post.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422281471507:android:679b2f648ad86bfb5b01e6",
+        "android_client_info": {
+          "package_name": "com.example.vyapar_post"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422281471507-9dkbrl9e1ljdb2u6ikcv7kbh9e6oa0i1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuTbq2QB6RpzL--HxioY-CcEFC_56V0ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422281471507-9dkbrl9e1ljdb2u6ikcv7kbh9e6oa0i1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

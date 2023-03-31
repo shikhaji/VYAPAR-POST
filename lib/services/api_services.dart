@@ -224,7 +224,7 @@ class ApiService {
     try {
       Loader.showLoader();
       Response response;
-      response = await dio.post(EndPoints.getAllPost);
+      response = await dio.post(EndPoints.getCurrentBalance,data: data);
       print("1");
       if (response.statusCode == 200 ) {
         GetCurrentBalanceModel responseData = GetCurrentBalanceModel.fromJson(response.data);
@@ -290,7 +290,7 @@ class ApiService {
     try {
     Loader.showLoader();
     Response response;
-    response = await dio.post(EndPoints.profileContant);
+    response = await dio.post(EndPoints.profileContant,data: data);
     print("1");
 
     if (response.statusCode == 200 ) {
@@ -432,7 +432,7 @@ class ApiService {
     try {
       Loader.showLoader();
       Response response;
-      response = await dio.post(EndPoints.getCity);
+      response = await dio.post(EndPoints.getCity,data: data);
       print("1");
       if (response.statusCode == 200 ) {
         GetCityModel responseData = GetCityModel.fromJson(response.data);
@@ -468,7 +468,7 @@ class ApiService {
     try {
       Loader.showLoader();
       Response response;
-      response = await dio.post(EndPoints.getCity);
+      response = await dio.post(EndPoints.myTransaction,data: data);
       print("1");
       if (response.statusCode == 200 ) {
         MyTransactionModel responseData = MyTransactionModel.fromJson(response.data);
@@ -524,6 +524,86 @@ class ApiService {
     }
     return null;
   }
+  //----------------------------ADD POST API-----------------------//
+  Future addPost(
+      BuildContext context, {
+        FormData? data,
+      }) async {
+    try {
+      Loader.showLoader();
+      Response response;
+      response = await dio.post(EndPoints.addPost,
+          // options: Options(headers: {
+          //   "Client-Service": "frontend-client",
+          //   "Auth-Key": 'simplerestapi',
+          // }),
+          data: data);
+
+      if (response.statusCode == 200) {
+        Loader.hideLoader();
+        Fluttertoast.showToast(
+          msg: 'uploaded Successfully...',
+          backgroundColor: Colors.grey,
+        );
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, Routs.mainHomeScreen,arguments: SendArguments(bottomIndex: 0), (route) => false);
+
+        debugPrint('responseData ----- > ${response.data}');
+        return response.data;
+      } else {
+        Loader.hideLoader();
+        throw Exception(response.data);
+      }
+    } on DioError catch (e) {
+      Loader.hideLoader();
+      debugPrint('Dio E  $e');
+      throw e.error;
+    }
+  }
+  //----------------------------VERIFY MOBILE API-----------------------//
+  Future verifyMobile(
+      BuildContext context, {
+        FormData? data,
+      }) async {
+    try {
+      Loader.showLoader();
+      Response response;
+      response = await dio.post(EndPoints.verifyMobile,
+          // options: Options(headers: {
+          //   "Client-Service": "frontend-client",
+          //   "Auth-Key": 'simplerestapi',
+          // }),
+          data: data);
+
+      if (response.statusCode == 200) {
+        Loader.hideLoader();
+        Fluttertoast.showToast(
+          msg: 'verified Successfully...',
+          backgroundColor: Colors.grey,
+        );
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+        // Navigator.pushNamed(context, Routs.otpVerificationScreen,
+        //     arguments: SendArguments(
+        //         phoneNumber: _phone.text.trim(),
+        //         otpStatus: 0
+        //     ) );
+
+
+        debugPrint('responseData ----- > ${response.data}');
+        return response.data;
+      } else {
+        Loader.hideLoader();
+        throw Exception(response.data);
+      }
+    } on DioError catch (e) {
+      Loader.hideLoader();
+      debugPrint('Dio E  $e');
+      throw e.error;
+    }
+  }
+
+
 
 
 }

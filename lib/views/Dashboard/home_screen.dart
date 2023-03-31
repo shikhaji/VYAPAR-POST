@@ -7,6 +7,7 @@ import 'package:vyapar_post/widget/post_view.dart';
 
 import '../../models/get_all_category_model.dart';
 import '../../models/get_all_post_model.dart';
+import '../../routs/app_routs.dart';
 import '../../services/api_services.dart';
 import '../../utils/app_asset.dart';
 import '../../utils/app_color.dart';
@@ -100,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                        return CetegoryList(
                          image:AppAsset.postImg,
                         name: "${getCategoryData[index].brandName}",
-                       );
-                     }),
+                       );}),
 
 
                    ),
@@ -123,10 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
                  itemCount: getAllPostData.length,
                  itemBuilder: (context, inx) {
                    return PostList(
-                     image:AppAsset.postImg,
+                     image:getAllPostData[inx].vapImage,
                      name:getAllPostData[inx].vapTitle,
-                     post: AppAsset.postImg,
-                    // post: getAllPostData[inx].vapImage,
+                     post: AppAsset.postImage,
+                     //post: getAllPostData[inx].vapImage,
+                    // post: getAllPostData[inx].vapImage!
+                    //     .replaceAll('"', '')
+                    //     .replaceAll('"', '')
+                    //     .toString(),
 
 
                    );
@@ -179,6 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBoxH10(),
             Image.asset(post,height: 300,fit: BoxFit.fill,),
+            // Image.network("https://vyapar.doctoroncals.in/uploads/$post",height: 300,fit: BoxFit.fill,),
             SizedBox(height: 10,),
 
             Padding(
@@ -222,7 +227,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Image.asset("assets/icons/heart.png",width: 25,height: 25,),
                   Image.asset("assets/icons/comment.png",width: 25,height: 25,),
                   Image.asset("assets/icons/share.png",width: 25,height: 25,),
-                  Image.asset("assets/icons/whatsapp.png",width: 25,height: 25,),
+                  GestureDetector(
+                    onTap: (){
+
+                    },
+                      child: Image.asset("assets/icons/whatsapp.png",width: 25,height: 25,)),
                   Image.asset("assets/icons/call.png",width: 25,height: 25,),
 
                 ],
@@ -260,5 +269,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../routs/app_routs.dart';
+import '../../services/api_services.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/app_text_style.dart';
@@ -76,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: _ProfileListTile.asset(
                 title: 'FAQ',
                 onTap: () {
-
+                  ApiService().getFaq(context,);
                 },
                 child: Icon(Icons.format_list_bulleted_sharp),
               ),

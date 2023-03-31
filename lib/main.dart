@@ -1,11 +1,14 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vyapar_post/routs/app_routs.dart';
 import 'package:vyapar_post/utils/screen_utils.dart';
 import 'package:vyapar_post/utils/theme_utils.dart';
 import 'package:vyapar_post/views/example.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

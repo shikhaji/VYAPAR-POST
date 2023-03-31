@@ -38,6 +38,11 @@ dependencies:
   dio: ^4.0.6
   url_launcher: ^6.1.9
   shared_preferences: ^2.0.16
+  firebase_core: ^2.8.0
+  firebase_auth: ^4.3.0
+  image_picker: ^0.8.6
+  r_dotted_line_border: ^0.1.1
+  flutter_stripe: ^9.0.0+1
 
 
   # The following adds the Cupertino Icons font to your application.

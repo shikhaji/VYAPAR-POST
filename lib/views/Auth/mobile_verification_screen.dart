@@ -1,9 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vyapar_post/routs/arguments.dart';
 import 'package:vyapar_post/utils/validation_mixin.dart';
 
 import '../../routs/app_routs.dart';
+import '../../services/api_services.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
@@ -57,6 +59,15 @@ class _MobileVerificationScreenState extends State<MobileVerificationScreen> wit
                 lable: "Send OTP ",
                 onPressed: (){
                   if (_formKey.currentState!.validate()) {
+                    FormData data() {
+                      return FormData.fromMap({
+                       "mobile_no" : _phone.text.trim(),
+
+                      });
+                    }
+                    ApiService().verifyMobile(context,data:data());
+
+
                     Navigator.pushNamed(context, Routs.otpVerificationScreen,
                         arguments: SendArguments(
                             phoneNumber: _phone.text.trim(),
