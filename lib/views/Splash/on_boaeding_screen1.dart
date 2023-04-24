@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/utils/app_asset.dart';
-import 'package:vyapar_post/utils/app_color.dart';
-import 'package:vyapar_post/utils/app_text.dart';
-import 'package:vyapar_post/utils/app_text_style.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
-import 'package:vyapar_post/widget/scroll_view.dart';
+
+
+import '../../utils/app_asset.dart';
+import '../../utils/app_color.dart';
+import '../../widget/custom_sized_box.dart';
+import '../../widget/scroll_view.dart';
 
 class OnBoardingScreen1 extends StatefulWidget {
   const OnBoardingScreen1({Key? key}) : super(key: key);
@@ -21,12 +21,12 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
       body: CustomScroll(
         children: [
           SizedBoxH8(),
-          Image.asset(AppAsset.obs2),
+          Image.asset(AppAsset.obssceen1),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'AD Post', style: TextStyle(
                   fontSize: 26,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w600
               )),
               TextSpan(text: '  करके अपने', style: TextStyle(
@@ -38,10 +38,10 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
             ]),
           ),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'Business', style: TextStyle(
                   fontSize: 26,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w600
               )),
               TextSpan(text: '  को बढाएं', style: TextStyle(
@@ -54,7 +54,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
           ),
           SizedBoxH20(),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'Facebook', style: TextStyle(
                   fontSize: 22,
                   color: AppColor.orange,
@@ -78,10 +78,10 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
             ]),
           ),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'Vyapar Post', style: TextStyle(
                   fontSize: 26,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w500
               )),
               TextSpan(text: ' App', style: TextStyle(
@@ -97,7 +97,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
             ]),
           ),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'की पोस्ट अपलोड करे और अपने', style: TextStyle(
                   fontSize: 20,
                   color: AppColor.black,
@@ -105,13 +105,13 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
               )),
               TextSpan(text: ' Business', style: TextStyle(
                   fontSize: 23,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w400
               )),
             ]),
           ),
           RichText(
-            text: TextSpan(children: [
+            text: const TextSpan(children: [
               TextSpan(text: 'को', style: TextStyle(
                   fontSize: 20,
                   color: AppColor.black,
@@ -119,7 +119,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
               )),
               TextSpan(text: ' Brand', style: TextStyle(
                   fontSize: 23,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w400
               )),
               TextSpan(text: ' बनाऐ', style: TextStyle(

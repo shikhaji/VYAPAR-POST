@@ -2,11 +2,12 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
+
 
 import '../../utils/app_asset.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_text_style.dart';
+import '../../widget/custom_sized_box.dart';
 import '../../widget/scroll_view.dart';
 
 class OnBoardingScreen2 extends StatefulWidget {
@@ -23,7 +24,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
       body: CustomScroll(
         children: [
           SizedBoxH10(),
-          Image.asset(AppAsset.obs1),
+          Image.asset(AppAsset.obssceen1),
           RichText(
             text: TextSpan(children: [
               TextSpan(text: 'ऐसा', style: TextStyle(
@@ -33,7 +34,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               )),
               TextSpan(text: '  Social platform', style: TextStyle(
                   fontSize: 24,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w600
               )),
               TextSpan(text: '  जो आपके', style: TextStyle(
@@ -48,7 +49,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
             text: TextSpan(children: [
               TextSpan(text: 'Business', style: TextStyle(
                   fontSize: 24,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w600
               )),
               TextSpan(text: '  को करे', style: TextStyle(
@@ -58,7 +59,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               )),
               TextSpan(text: '  Promote', style: TextStyle(
                   fontSize: 24,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w600
               )),
 
@@ -87,7 +88,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
             text: TextSpan(children: [
               TextSpan(text: '  Call', style: TextStyle(
                   fontSize: 22,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w300
               )),
               TextSpan(text: ' और ', style: TextStyle(
@@ -97,7 +98,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               )),
               TextSpan(text: ' Whatsapp ', style: TextStyle(
                   fontSize: 22,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   fontWeight: FontWeight.w300
               )),
             ]),

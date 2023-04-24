@@ -54,6 +54,13 @@ class AllPost {
     required this.vapVideoType,
     required this.vapImage,
     required this.vapVideoUrl,
+    required this.vapLike,
+    required this.vapComment,
+    required this.vapLikeStatus,
+    this.branchId,
+    this.branchPhoto,
+    this.branchContact,
+    this.branchEmail,
   });
 
   String vapId;
@@ -64,6 +71,13 @@ class AllPost {
   String vapVideoType;
   String vapImage;
   String vapVideoUrl;
+  String vapLike;
+  String vapComment;
+  int vapLikeStatus;
+  String? branchId;
+  String? branchPhoto;
+  String? branchContact;
+  String? branchEmail;
 
   factory AllPost.fromJson(Map<String, dynamic> json) => AllPost(
     vapId: json["VAP_ID"],
@@ -74,6 +88,13 @@ class AllPost {
     vapVideoType: json["VAP_VIDEO_TYPE"],
     vapImage: json["VAP_IMAGE"],
     vapVideoUrl: json["VAP_VIDEO_URL"],
+    vapLike: json["VAP_LIKE"],
+    vapComment: json["VAP_COMMENT"],
+    vapLikeStatus: json["VAP_LIKE_STATUS"],
+    branchId: json["BRANCH_ID"],
+    branchPhoto: json["BRANCH_PHOTO"],
+    branchContact: json["BRANCH_CONTACT"],
+    branchEmail: json["BRANCH_EMAIL"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,5 +106,12 @@ class AllPost {
     "VAP_VIDEO_TYPE": vapVideoType,
     "VAP_IMAGE": vapImage,
     "VAP_VIDEO_URL": vapVideoUrl,
+    "VAP_LIKE": vapLike,
+    "VAP_COMMENT": vapComment,
+    "VAP_LIKE_STATUS": vapLikeStatus,
+    "BRANCH_ID": branchId,
+    "BRANCH_PHOTO": branchPhoto,
+    "BRANCH_CONTACT": branchContact,
+    "BRANCH_EMAIL": branchEmail,
   };
 }

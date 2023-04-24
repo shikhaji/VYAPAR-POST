@@ -10,12 +10,12 @@ String getCurrentBalanceModelToJson(GetCurrentBalanceModel data) => json.encode(
 
 class GetCurrentBalanceModel {
   GetCurrentBalanceModel({
-    required this.status,
-    required this.balance,
+     this.status,
+     this.balance,
   });
 
-  int status;
-  String balance;
+  int? status;
+  String? balance;
 
   factory GetCurrentBalanceModel.fromJson(Map<String, dynamic> json) => GetCurrentBalanceModel(
     status: json["status"],

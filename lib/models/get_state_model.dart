@@ -1,51 +1,31 @@
-// To parse this JSON data, do
-//
-//     final getStateModel = getStateModelFromJson(jsonString);
-
 import 'dart:convert';
 
-GetStateModel getStateModelFromJson(String str) => GetStateModel.fromJson(json.decode(str));
+GetStateListModel getStateListModelFromJson(String str) => GetStateListModel.fromJson(json.decode(str));
 
-String getStateModelToJson(GetStateModel data) => json.encode(data.toJson());
+String getStateListModelToJson(GetStateListModel data) => json.encode(data.toJson());
 
-class GetStateModel {
-  GetStateModel({
+class GetStateListModel {
+  GetStateListModel({
     required this.status,
     required this.message,
   });
 
   int status;
-  Message message;
+  List<Message> message;
 
-  factory GetStateModel.fromJson(Map<String, dynamic> json) => GetStateModel(
+  factory GetStateListModel.fromJson(Map<String, dynamic> json) => GetStateListModel(
     status: json["status"],
-    message: Message.fromJson(json["message"]),
+    message: List<Message>.from(json["message"].map((x) => Message.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "message": message.toJson(),
+    "message": List<dynamic>.from(message.map((x) => x.toJson())),
   };
 }
 
 class Message {
   Message({
-    required this.state,
-  });
-
-  List<State> state;
-
-  factory Message.fromJson(Map<String, dynamic> json) => Message(
-    state: List<State>.from(json["state"].map((x) => State.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "state": List<dynamic>.from(state.map((x) => x.toJson())),
-  };
-}
-
-class State {
-  State({
     required this.stateId,
     required this.stateName,
     required this.countryId,
@@ -55,7 +35,7 @@ class State {
   String stateName;
   String countryId;
 
-  factory State.fromJson(Map<String, dynamic> json) => State(
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
     stateId: json["STATE_ID"],
     stateName: json["STATE_NAME"],
     countryId: json["COUNTRY_ID"],

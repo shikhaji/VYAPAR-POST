@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
         this.color,
         this.isStyle = false,
         required this.onPressed,
-        this.height})
+        this.height, })
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
         // RoundedRectangleBorder(
         //     borderRadius: BorderRadius.circular(primaryButtonRadius)),
         //
-        color: color ?? AppColor.primaryColor,
+        color: color ?? AppColor.primaryBlue,
         highlightColor: Colors.transparent,
         elevation: 3,
         onPressed: onPressed,
@@ -39,7 +39,7 @@ class PrimaryButton extends StatelessWidget {
             style: isStyle == false
                 ? AppTextStyle.buttonTextStyle
                 : AppTextStyle.buttonTextStyle
-                .copyWith(color: color ?? AppColor.primaryColor)));
+                .copyWith(color: color ?? AppColor.primaryBlue)));
   }
 }
 
@@ -68,7 +68,7 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: bgColor ?? AppColor.white,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColor.primaryColor, width: 1)),
+            border: Border.all(color: AppColor.primaryBlue, width: 1)),
         child: Padding(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
@@ -76,7 +76,7 @@ class CustomButton extends StatelessWidget {
               child: appText(lable,
                   style: AppTextStyle.alertSubtitle.copyWith(
                       fontSize: Sizes.s16.h,
-                      color: color ?? AppColor.primaryColor)),
+                      color: color ?? AppColor.primaryBlue)),
             )),
       ),
     );

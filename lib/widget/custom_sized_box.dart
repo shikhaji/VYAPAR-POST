@@ -7,6 +7,10 @@ import '../utils/app_sizes.dart';
 class SizedBoxH10 extends SizedBox {
   SizedBoxH10({Key? key}) : super(key: key, height: Sizes.s10.h);
 }
+class SizedBoxH12 extends SizedBox {
+  SizedBoxH12({Key? key}) : super(key: key, height: Sizes.s12.h);
+}
+
 
 class SizedBoxH8 extends SizedBox {
   SizedBoxH8({Key? key}) : super(key: key, height: Sizes.s8.h);
@@ -34,6 +38,14 @@ class SizedBoxH34 extends SizedBox {
 
 class SizedBoxW10 extends SizedBox {
   SizedBoxW10({Key? key}) : super(key: key, width: Sizes.s10.w);
+}
+
+class SizedBoxW14 extends SizedBox {
+  SizedBoxW14({Key? key}) : super(key: key, width: Sizes.s14.w);
+}
+
+class SizedBoxW18 extends SizedBox {
+  SizedBoxW18({Key? key}) : super(key: key, width: Sizes.s18.w);
 }
 
 class SizedBoxW8 extends SizedBox {

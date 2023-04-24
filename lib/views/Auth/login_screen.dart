@@ -3,18 +3,19 @@ import 'dart:ffi';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/utils/app_color.dart';
-import 'package:vyapar_post/utils/app_text.dart';
-import 'package:vyapar_post/utils/app_text_style.dart';
-import 'package:vyapar_post/utils/validation_mixin.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
-import 'package:vyapar_post/widget/primary_button.dart';
-import 'package:vyapar_post/widget/primary_textfield.dart';
+
 
 
 import '../../routs/app_routs.dart';
 import '../../routs/arguments.dart';
 import '../../services/api_services.dart';
+import '../../utils/app_color.dart';
+import '../../utils/app_text.dart';
+import '../../utils/app_text_style.dart';
+import '../../utils/validation_mixin.dart';
+import '../../widget/custom_sized_box.dart';
+import '../../widget/primary_button.dart';
+import '../../widget/primary_textfield.dart';
 import '../../widget/scroll_view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> with ValidationMixin{
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(onPressed: () {
-                  Navigator.pushNamed(context, Routs.forgetPasswordVerification);
+                 Navigator.pushNamed(context, Routs.forgetPasswordVerification);
                 },
                     child: appText("forget password?",style: AppTextStyle.lable)),
               ],
@@ -100,22 +101,29 @@ class _LoginScreenState extends State<LoginScreen> with ValidationMixin{
                   });
                 }
                 ApiService().login(context,data:data()).then((value){
-                      if(value?.branchKycStatus == "0"){
-                        Navigator.pushNamed(context, Routs.updateProfileScreen,
-                            arguments: SendArguments(
-                              phoneNumber:_phone.text.trim()
+                  if(value?.branchKycStatus == "0"){
+                    Navigator.pushNamed(context, Routs.updateProfileScreen,
+                        arguments: SendArguments(
+                            phoneNumber:_phone.text.trim()
 
-                            ) );
-                      }else{
-                        Navigator.pushNamed(context, Routs.mainHomeScreen,
-                            arguments: SendArguments(
-                              // phoneNumber:_phone.text.trim()
-                                bottomIndex: 0
-                            ) );
-                      }
+                        ) );
+                  }else{
+                    Navigator.pushNamed(context, Routs.mainHomeScreen,
+                        arguments: SendArguments(
+                          // phoneNumber:_phone.text.trim()
+                            bottomIndex: 0
+                        ) );
+
+
+
+                  }
 
                 });
-
+                // Navigator.pushNamed(context, Routs.mainHomeScreen,
+                // arguments: SendArguments(
+                //   bottomIndex: 0,
+                // // phoneNumber:_phone.text.trim()
+                // ) );
               }
 
                 }),
@@ -131,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> with ValidationMixin{
 
 
                   },
-                    child: appText("Sign Up",style: AppTextStyle.redTextStyle.copyWith(color: AppColor.primaryColor))),
+                    child: appText("Sign Up",style: AppTextStyle.redTextStyle.copyWith(color: AppColor.primaryBlue))),
               ],
             )
           ],

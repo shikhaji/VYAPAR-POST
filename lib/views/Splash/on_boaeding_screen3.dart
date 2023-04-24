@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
+
 
 import '../../utils/app_asset.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_text_style.dart';
+import '../../widget/custom_sized_box.dart';
 import '../../widget/scroll_view.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
@@ -21,12 +22,12 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
       body: CustomScroll(
         children: [
           SizedBoxH20(),
-          Image.asset(AppAsset.obs3),
+          Image.asset(AppAsset.obssceen1),
           SizedBoxH28(),
           SizedBoxH18(),
           Text("Low Cost & Effactive Marketing", style: TextStyle(
               fontSize: 20,
-              color: AppColor.primaryColor,
+              color: AppColor.primaryBlue,
               fontWeight: FontWeight.w700
           )),
           SizedBoxH28(),
@@ -37,7 +38,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
           )),
           Text("Effactive Marketing", style: TextStyle(
               fontSize: 18,
-              color: AppColor.primaryColor,
+              color: AppColor.primaryBlue,
               fontWeight: FontWeight.w100
           )),
 

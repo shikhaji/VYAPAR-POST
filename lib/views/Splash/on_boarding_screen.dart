@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import 'package:vyapar_post/utils/app_color.dart';
-import 'package:vyapar_post/utils/app_text.dart';
-import 'package:vyapar_post/utils/app_text_style.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
-
-
 import '../../routs/app_routs.dart';
+import '../../utils/app_color.dart';
+import '../../utils/app_text.dart';
+import '../../utils/app_text_style.dart';
+import '../../widget/custom_sized_box.dart';
 import '../../widget/primary_button.dart';
 import '../../widget/scroll_view.dart';
 import 'on_boaeding_screen1.dart';
@@ -80,8 +77,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       controller: _controller,
                       count: 3,
                       effect: JumpingDotEffect(
-                          activeDotColor: AppColor.primaryColor,
-                          dotColor: AppColor.primaryColor.withOpacity(0.5),
+                          activeDotColor: AppColor.primaryBlue,
+                          dotColor: AppColor.primaryBlue.withOpacity(0.5),
                           dotHeight: 10,
                           dotWidth: 10
                       ),

@@ -8,15 +8,17 @@ class AppTextStyle {
   AppTextStyle._();
 
   static const TextStyle mainTitle = TextStyle(
-    fontSize: Sizes.s32, fontWeight: FontWeight.w900, color: AppColor.primaryColor,);
+    fontSize: Sizes.s32, fontWeight: FontWeight.w900, color: AppColor.primaryBlue,);
   static const TextStyle headline1 = TextStyle(
     fontSize: Sizes.s28, fontWeight: FontWeight.w900, color: AppColor.white,);
   static const TextStyle title = TextStyle(
       fontSize: Sizes.s26, fontWeight: FontWeight.w700, color: AppColor.black);
+  static const TextStyle commenttitle = TextStyle(
+      fontSize: Sizes.s20, fontWeight: FontWeight.w500, color: AppColor.black);
   static const TextStyle lable = TextStyle(
       fontSize: Sizes.s16, fontWeight: FontWeight.w500, color: AppColor.black);
   static const TextStyle appName = TextStyle(
-      fontSize: Sizes.s34, fontWeight: FontWeight.w700, color: AppColor.primaryColor);
+      fontSize: Sizes.s34, fontWeight: FontWeight.w700, color: AppColor.primaryBlue);
   static const TextStyle subTitle = TextStyle(
       fontSize: Sizes.s14, fontWeight: FontWeight.w900, color: AppColor.grey);
   static const TextStyle textFieldFont = TextStyle(

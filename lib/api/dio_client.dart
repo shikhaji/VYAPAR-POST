@@ -1,14 +1,8 @@
-
-
-
-
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:vyapar_post/API/url.dart';
-import 'package:vyapar_post/utils/function.dart';
-
 import '../models/api_response_model.dart';
+import '../utils/function.dart';
 
 class ApiClient {
   final Dio dio = Dio(BaseOptions(

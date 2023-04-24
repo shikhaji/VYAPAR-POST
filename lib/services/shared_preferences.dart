@@ -46,6 +46,10 @@ class Preferances {
       return strDef;
     }
   }
+  static Future clearAllPref() async {
+    prefe = await SharedPreferences.getInstance();
+    prefe!.clear();
+  }
 
   ///------------------REMOVE STORE DATA ----------------///
   static Future removeStoredData(String key) async {

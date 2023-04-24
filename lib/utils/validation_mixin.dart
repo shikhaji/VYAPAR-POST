@@ -85,7 +85,7 @@ mixin ValidationMixin {
   String? passwordValidator(String? password, {bool isLogin = false}) {
     if (password!.isNotEmpty) {
       if (isLogin == false) {
-        if (password.length <= 5) {
+        if (password.length <= 6) {
           return "Password Is Too Short";
         }
       }

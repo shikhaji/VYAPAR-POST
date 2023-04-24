@@ -10,18 +10,18 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   LoginModel({
-    required this.status,
-    required this.message,
-    required this.id,
-    required this.token,
-    required this.branchKycStatus,
+     this.status,
+     this.message,
+     this.id,
+     this.token,
+     this.branchKycStatus,
   });
 
-  int status;
-  String message;
-  String id;
-  String token;
-  String branchKycStatus;
+  int? status;
+  String? message;
+  String? id;
+  String? token;
+  String? branchKycStatus;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
     status: json["status"],

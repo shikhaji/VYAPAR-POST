@@ -6,19 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:r_dotted_line_border/r_dotted_line_border.dart';
-import 'package:vyapar_post/utils/app_color.dart';
-import 'package:vyapar_post/widget/primary_button.dart';
-import 'package:vyapar_post/widget/scroll_view.dart';
-
 import '../../services/api_services.dart';
 import '../../services/shared_preferences.dart';
+import '../../utils/app_color.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
 import '../../utils/screen_utils.dart';
 import '../../widget/custom_sized_box.dart';
 import '../../widget/drawer_widget.dart';
+import '../../widget/primary_button.dart';
 import '../../widget/primary_textfield.dart';
+import '../../widget/scroll_view.dart';
 
 class PostAdScreen extends StatefulWidget {
   const PostAdScreen({Key? key}) : super(key: key);
@@ -30,8 +29,24 @@ class PostAdScreen extends StatefulWidget {
 class _PostAdScreenState extends State<PostAdScreen> {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _discription = TextEditingController();
+  String? loginId;
   XFile? selectedDocument;
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetData();
+
+  }
+
+  Future<void> GetData()async {
+    String? id = await Preferances.getString("userId");
+    setState(() {
+      loginId = id!;
+    });
+    print(loginId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +59,7 @@ class _PostAdScreenState extends State<PostAdScreen> {
             SizedBoxH10(),
             SizedBoxH28(),
             appText("Upload Post",style: AppTextStyle.title),
-            SizedBoxH6(),
+            SizedBoxH8(),
             appText("Please upload your image and videos here",style: AppTextStyle.subTitle),
             SizedBoxH28(),
             appText("Add title",style: AppTextStyle.lable),
@@ -71,30 +86,26 @@ class _PostAdScreenState extends State<PostAdScreen> {
               ),
             ),
             SizedBoxH28(),
-            SizedBoxH18(),
-            SizedBoxH18(),
-            SizedBoxH18(),
+
             PrimaryButton(
                 lable: "Upload Post",
                 onPressed : () async {
                   if (_formKey.currentState!.validate()) {
                     if (selectedDocument!.path == null) {
                       Fluttertoast.showToast(
-                        msg: 'Please Upload Prescription',
+                        msg: 'Please Upload Post',
                         backgroundColor: Colors.grey,
                       );
                     } else {
-                      String? id = await Preferances.getString("userId");
+                      //String? id = await Preferances.getString("userId");
                       print("selectedDocument!.path:=${selectedDocument!.path}");
                       var file =
                       await MultipartFile.fromFile(selectedDocument!.path);
                       print("pass file:=${file}");
+                      print('id:=$loginId');
                       FormData data() {
                         return FormData.fromMap({
-                          "loginid": id!
-                              .replaceAll('"', '')
-                              .replaceAll('"', '')
-                              .toString(),
+                          "loginid": loginId!.replaceAll('"', '').replaceAll('"', '').toString(),
                           "type": 2,
                           "title":_title.text.trim(),
                           "desc": _discription.text.trim(),
@@ -113,7 +124,7 @@ class _PostAdScreenState extends State<PostAdScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Post Ads"),
+        title: Text("Post Ads",style: AppTextStyle.appBarTextTitle,),
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -169,7 +180,7 @@ class _PostAdScreenState extends State<PostAdScreen> {
         child: Material(
           child: Container(
             decoration: BoxDecoration(
-              color: AppColor.primaryColor,
+              color: AppColor.primaryBlue,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -178,7 +189,7 @@ class _PostAdScreenState extends State<PostAdScreen> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
-                  color: AppColor.primaryColor,
+                  color: AppColor.primaryBlue,
                   child: const Center(
                     child: Text(
                       "Select Image",

@@ -1,23 +1,27 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/views/Auth/forget_password_screen.dart';
-import 'package:vyapar_post/views/Auth/forget_password_verification.dart';
-import 'package:vyapar_post/views/Auth/login_screen.dart';
-import 'package:vyapar_post/views/Auth/mobile_verification_screen.dart';
-import 'package:vyapar_post/views/Auth/otp_verification_screen.dart';
-import 'package:vyapar_post/views/Auth/signup_screen.dart';
-import 'package:vyapar_post/views/Auth/update_profile_screen.dart';
-import 'package:vyapar_post/views/Dashboard/main_home_screen.dart';
-import 'package:vyapar_post/views/Dashboard/post_ad_Screen.dart';
-import 'package:vyapar_post/views/Dashboard/profile_screen.dart';
-import 'package:vyapar_post/views/Dashboard/subscription_plan_screen.dart';
-import 'package:vyapar_post/views/Dashboard/wallet_screen.dart';
-import 'package:vyapar_post/views/Splash/on_boarding_screen.dart';
-import 'package:vyapar_post/views/Splash/splash_screen.dart';
 
+import '../views/Auth/forget_password_screen.dart';
+import '../views/Auth/forget_password_verification.dart';
+import '../views/Auth/login_screen.dart';
+import '../views/Auth/mobile_verification_screen.dart';
+import '../views/Auth/otp_verification_screen.dart';
+import '../views/Auth/signup_screen.dart';
+import '../views/Auth/update_profile_screen.dart';
+import '../views/Dashboard/category_screen.dart';
+import '../views/Dashboard/comments_screen.dart';
+import '../views/Dashboard/edit_profile.dart';
+import '../views/Dashboard/fquestion_screen.dart';
 import '../views/Dashboard/home_screen.dart';
-import '../views/example.dart';
+import '../views/Dashboard/main_home_screen.dart';
+import '../views/Dashboard/post_ad_Screen.dart';
+import '../views/Dashboard/profile_screen.dart';
+import '../views/Dashboard/subscription_plan_screen.dart';
+import '../views/Dashboard/wallet_screen.dart';
+import '../views/Splash/on_boarding_screen.dart';
+import '../views/Splash/splash_screen.dart';
+
 import 'arguments.dart';
 
 class Routs {
@@ -37,6 +41,10 @@ class Routs {
   static const String walletScreen = "/wallet_screen";
   static const String profileScreen = "/profile_screen";
   static const String subscriptionPlanScreen = "/subscription_plan_screen";
+  static const String fQuestionScreen = "/fquestion_screen";
+  static const String editProfileScreen = "/edit_profile";
+  static const String commentScreen = "/comments_screen";
+  static const String categoryScreen = "/category_screen";
 
 }
 
@@ -45,17 +53,25 @@ class RoutGenerator {
     var arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routs.splash:
-        return MaterialPageRoute(builder: (_) => const DemoScreen());
+
 
       case Routs.loginScreen:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+
+      case Routs.fQuestionScreen:
+        return MaterialPageRoute(builder: (_) => FquestionScreen());
 
       case Routs.forgetPasswordScreen:
         return MaterialPageRoute(builder: (_) =>  ForgetPasswordScreen( ));
 
       case Routs.updateProfileScreen:
         return MaterialPageRoute(builder: (_) =>  UpdateProfileScreen(arguments: arguments as SendArguments));
+
+      case Routs.commentScreen:
+        return MaterialPageRoute(builder: (_) =>  CommentsScreen(arguments: arguments as SendArguments));
+
+      case Routs.editProfileScreen:
+        return MaterialPageRoute(builder: (_) => EditProfileScreen());
 
       case Routs.signupScreen:
         return MaterialPageRoute(builder: (_) =>  SignupScreen(arguments: arguments as SendArguments));
@@ -93,11 +109,12 @@ class RoutGenerator {
       case Routs.subscriptionPlanScreen:
         return MaterialPageRoute(builder: (_) => const SubscriptionPlanScreen());
 
-
+      case Routs.categoryScreen:
+        return MaterialPageRoute(builder: (_) => CategoryScreen( arguments: arguments as SendArguments,));
 
 
       default:
-        return null;
+        return  null;
     }
   }
 }

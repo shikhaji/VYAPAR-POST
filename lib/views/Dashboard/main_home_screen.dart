@@ -1,17 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/utils/app_asset.dart';
-import 'package:vyapar_post/utils/app_text_style.dart';
 import 'package:vyapar_post/views/Dashboard/post_ad_Screen.dart';
 import 'package:vyapar_post/views/Dashboard/profile_screen.dart';
 import 'package:vyapar_post/views/Dashboard/wallet_screen.dart';
-import 'package:vyapar_post/widget/scroll_view.dart';
+
 
 import '../../routs/arguments.dart';
-import '../../utils/app_color.dart';
-import '../../utils/app_sizes.dart';
-import '../../utils/screen_utils.dart';
-import '../../widget/drawer_widget.dart';
 import '../../widget/primary_bottom_navigtion_bar.dart';
 import 'home_screen.dart';
 

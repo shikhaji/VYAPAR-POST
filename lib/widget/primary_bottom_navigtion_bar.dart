@@ -25,7 +25,7 @@ class PrimaryBottomNavigationBar extends StatelessWidget {
       onTap: onTap,
       showSelectedLabels: true,
       selectedLabelStyle:
-      AppTextStyle.body1.copyWith(color: AppColor.primaryColor),
+      AppTextStyle.body1.copyWith(color: AppColor.primaryBlue),
       unselectedLabelStyle: AppTextStyle.body1,
       showUnselectedLabels: true,
       items: [

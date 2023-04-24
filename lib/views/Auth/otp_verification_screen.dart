@@ -4,8 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
-import 'package:vyapar_post/utils/loader.dart';
-import 'package:vyapar_post/utils/validation_mixin.dart';
 
 import '../../models/auth_result.dart';
 import '../../routs/app_routs.dart';
@@ -13,6 +11,8 @@ import '../../routs/arguments.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
 import '../../utils/function.dart';
+import '../../utils/loader.dart';
+import '../../utils/validation_mixin.dart';
 import '../../widget/custom_sized_box.dart';
 import '../../widget/primary_button.dart';
 import '../../widget/primary_textfield.dart';
@@ -102,7 +102,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Vali
                   }
 
                 }
-                ),
+            ),
 
           ],
         ),

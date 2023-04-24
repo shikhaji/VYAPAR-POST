@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/routs/arguments.dart';
-import 'package:vyapar_post/utils/validation_mixin.dart';
+
 
 import '../../routs/app_routs.dart';
+import '../../routs/arguments.dart';
 import '../../services/api_services.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
+import '../../utils/validation_mixin.dart';
 import '../../widget/custom_sized_box.dart';
 import '../../widget/primary_button.dart';
 import '../../widget/primary_textfield.dart';
@@ -61,18 +62,29 @@ class _MobileVerificationScreenState extends State<MobileVerificationScreen> wit
                   if (_formKey.currentState!.validate()) {
                     FormData data() {
                       return FormData.fromMap({
-                       "mobile_no" : _phone.text.trim(),
+                        "mobile_no": _phone.text.trim(),
 
                       });
                     }
-                    ApiService().verifyMobile(context,data:data());
+                    ApiService().mobileVerifyApi(context,_phone.text.trim(),data: data());
+                    // ApiService().mobileVerifyApi(context,data:data()).then((value){
+                    //  if(value?.status==200){
+                    //    if(value?.message==1){
+                    //
+                    //    }else{
+                    //       CommonFunctions.toast("Mobile Number Is Already Register");
+                    //    }
+                    //  }
+                    // });
+                    // CommonFunctions.toast("Mobile Number Is Verify");
+                    // Navigator.pushNamed(context, Routs.otpVerificationScreen,
+                    //     arguments: SendArguments(
+                    //         phoneNumber: _phone.text.trim(),
+                    //         otpStatus: 0
+                    //     ) );
 
 
-                    Navigator.pushNamed(context, Routs.otpVerificationScreen,
-                        arguments: SendArguments(
-                            phoneNumber: _phone.text.trim(),
-                            otpStatus: 0
-                        ) );
+
                   }
 
 
@@ -90,7 +102,7 @@ class _MobileVerificationScreenState extends State<MobileVerificationScreen> wit
 
 
                     },
-                    child: appText("Login",style: AppTextStyle.redTextStyle.copyWith(color: AppColor.primaryColor))),
+                    child: appText("Login",style: AppTextStyle.redTextStyle.copyWith(color: AppColor.primaryBlue))),
               ],
             )
 

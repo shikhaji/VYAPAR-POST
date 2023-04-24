@@ -1,55 +1,59 @@
+import 'dart:convert';
+
+ProfileContantModel profileContantModelFromJson(String str) => ProfileContantModel.fromJson(json.decode(str));
+
+String profileContantModelToJson(ProfileContantModel data) => json.encode(data.toJson());
+
 class ProfileContantModel {
-  int? status;
+  ProfileContantModel({
+    required this.status,
+     this.message,
+  });
+
+  int status;
   Message? message;
 
-  ProfileContantModel({this.status, this.message});
+  factory ProfileContantModel.fromJson(Map<String, dynamic> json) => ProfileContantModel(
+    status: json["status"],
+    message: Message.fromJson(json["message"]),
+  );
 
-  ProfileContantModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message =
-    json['message'] != null ? new Message.fromJson(json['message']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.message != null) {
-      data['message'] = this.message!.toJson();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "message": message!.toJson(),
+  };
 }
 
 class Message {
+  Message({
+     this.category,
+     this.profile,
+  });
+
   List<Category>? category;
   Profile? profile;
 
-  Message({this.category, this.profile});
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
+    category: List<Category>.from(json["category"].map((x) => Category.fromJson(x))),
+    profile: Profile.fromJson(json["profile"]),
+  );
 
-  Message.fromJson(Map<String, dynamic> json) {
-    if (json['category'] != null) {
-      category = <Category>[];
-      json['category'].forEach((v) {
-        category!.add(new Category.fromJson(v));
-      });
-    }
-    profile =
-    json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.category != null) {
-      data['category'] = this.category!.map((v) => v.toJson()).toList();
-    }
-    if (this.profile != null) {
-      data['profile'] = this.profile!.toJson();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "category": List<dynamic>.from(category!.map((x) => x.toJson())),
+    "profile": profile!.toJson(),
+  };
 }
 
 class Category {
+  Category({
+     this.id,
+     this.vendorId,
+     this.brandName,
+     this.status,
+     this.date,
+     this.brandImage,
+  });
+
   String? id;
   String? vendorId;
   String? brandName;
@@ -57,148 +61,141 @@ class Category {
   String? date;
   String? brandImage;
 
-  Category(
-      {this.id,
-        this.vendorId,
-        this.brandName,
-        this.status,
-        this.date,
-        this.brandImage});
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+    id: json["id"],
+    vendorId: json["vendor_id"],
+    brandName: json["brand_name"],
+    status: json["status"],
+    date: json["date"],
+    brandImage: json["brand_image"],
+  );
 
-  Category.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    vendorId = json['vendor_id'];
-    brandName = json['brand_name'];
-    status = json['status'];
-    date = json['date'];
-    brandImage = json['brand_image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['vendor_id'] = this.vendorId;
-    data['brand_name'] = this.brandName;
-    data['status'] = this.status;
-    data['date'] = this.date;
-    data['brand_image'] = this.brandImage;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "vendor_id": vendorId,
+    "brand_name": brandName,
+    "status": status,
+    "date": date,
+    "brand_image": brandImage,
+  };
 }
 
 class Profile {
-  String? bRANCHID;
-  String? fIRMID;
-  String? bRANCHNAME;
-  String? bRANCHCODE;
-  String? bRANCHADDRESS;
-  String? bRANCHSTATE;
-  String? bRANCHCITY;
-  String? bRANCHCONTACT;
-  String? bRANCHPHONE;
-  String? bRANCHEMAIL;
-  String? bRANCHTARGET;
-  String? bRANCHCREATED;
-  String? bRANCHTT;
-  String? bRANCHUSERNAME;
-  String? bRANCHPASSWORD;
-  String? bRANCHSTATUS;
-  String? cOMPANYHRMTYPE;
-  String? pARENTID;
-  String? pARENTTYPE;
-  String? sPONSERID;
-  String? uPPERID;
-  String? sTARTDATE;
-  String? bRANCHVIEWPASSWORD;
-  String? cATEGORYID;
-  String? bRANCHKYCSTATUS;
-  String? sPONSERNAME;
+  Profile({
+     this.branchId,
+    this.firmId,
+     this.branchName,
+    this.branchCode,
+    this.branchAddress,
+    this.branchState,
+    this.branchCity,
+     this.branchContact,
+    this.branchPhone,
+     this.branchEmail,
+    this.branchTarget,
+    this.branchCreated,
+     this.branchTt,
+    this.branchUsername,
+     this.branchPassword,
+     this.branchStatus,
+    this.companyHrmType,
+    this.parentId,
+    this.parentType,
+    this.sponserId,
+    this.upperId,
+    this.startDate,
+     this.branchViewPassword,
+     this.categoryId,
+     this.branchKycStatus,
+     this.sponserName,
+    this.branchPhoto,
+  });
 
-  Profile(
-      {this.bRANCHID,
-        this.fIRMID,
-        this.bRANCHNAME,
-        this.bRANCHCODE,
-        this.bRANCHADDRESS,
-        this.bRANCHSTATE,
-        this.bRANCHCITY,
-        this.bRANCHCONTACT,
-        this.bRANCHPHONE,
-        this.bRANCHEMAIL,
-        this.bRANCHTARGET,
-        this.bRANCHCREATED,
-        this.bRANCHTT,
-        this.bRANCHUSERNAME,
-        this.bRANCHPASSWORD,
-        this.bRANCHSTATUS,
-        this.cOMPANYHRMTYPE,
-        this.pARENTID,
-        this.pARENTTYPE,
-        this.sPONSERID,
-        this.uPPERID,
-        this.sTARTDATE,
-        this.bRANCHVIEWPASSWORD,
-        this.cATEGORYID,
-        this.bRANCHKYCSTATUS,
-        this.sPONSERNAME});
+  String? branchId;
+  dynamic firmId;
+  String? branchName;
+  dynamic branchCode;
+  dynamic branchAddress;
+  dynamic branchState;
+  dynamic branchCity;
+  String? branchContact;
+  dynamic branchPhone;
+  String? branchEmail;
+  dynamic branchTarget;
+  dynamic branchCreated;
+  DateTime? branchTt;
+  dynamic branchUsername;
+  String? branchPassword;
+  String? branchStatus;
+  dynamic companyHrmType;
+  dynamic parentId;
+  dynamic parentType;
+  dynamic sponserId;
+  dynamic upperId;
+  dynamic startDate;
+  String? branchViewPassword;
+  String? categoryId;
+  String? branchKycStatus;
+  String? sponserName;
+  String? branchPhoto;
 
-  Profile.fromJson(Map<String, dynamic> json) {
-    bRANCHID = json['BRANCH_ID'];
-    fIRMID = json['FIRM_ID'];
-    bRANCHNAME = json['BRANCH_NAME'];
-    bRANCHCODE = json['BRANCH_CODE'];
-    bRANCHADDRESS = json['BRANCH_ADDRESS'];
-    bRANCHSTATE = json['BRANCH_STATE'];
-    bRANCHCITY = json['BRANCH_CITY'];
-    bRANCHCONTACT = json['BRANCH_CONTACT'];
-    bRANCHPHONE = json['BRANCH_PHONE'];
-    bRANCHEMAIL = json['BRANCH_EMAIL'];
-    bRANCHTARGET = json['BRANCH_TARGET'];
-    bRANCHCREATED = json['BRANCH_CREATED'];
-    bRANCHTT = json['BRANCH_TT'];
-    bRANCHUSERNAME = json['BRANCH_USERNAME'];
-    bRANCHPASSWORD = json['BRANCH_PASSWORD'];
-    bRANCHSTATUS = json['BRANCH_STATUS'];
-    cOMPANYHRMTYPE = json['COMPANY_HRM_TYPE'];
-    pARENTID = json['PARENT_ID'];
-    pARENTTYPE = json['PARENT_TYPE'];
-    sPONSERID = json['SPONSER_ID'];
-    uPPERID = json['UPPER_ID'];
-    sTARTDATE = json['START_DATE'];
-    bRANCHVIEWPASSWORD = json['BRANCH_VIEW_PASSWORD'];
-    cATEGORYID = json['CATEGORY_ID'];
-    bRANCHKYCSTATUS = json['BRANCH_KYC_STATUS'];
-    sPONSERNAME = json['SPONSER_NAME'];
-  }
+  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+    branchId: json["BRANCH_ID"],
+    firmId: json["FIRM_ID"],
+    branchName: json["BRANCH_NAME"],
+    branchCode: json["BRANCH_CODE"],
+    branchAddress: json["BRANCH_ADDRESS"],
+    branchState: json["BRANCH_STATE"],
+    branchCity: json["BRANCH_CITY"],
+    branchContact: json["BRANCH_CONTACT"],
+    branchPhone: json["BRANCH_PHONE"],
+    branchEmail: json["BRANCH_EMAIL"],
+    branchTarget: json["BRANCH_TARGET"],
+    branchCreated: json["BRANCH_CREATED"],
+    branchTt: DateTime.parse(json["BRANCH_TT"]),
+    branchUsername: json["BRANCH_USERNAME"],
+    branchPassword: json["BRANCH_PASSWORD"],
+    branchStatus: json["BRANCH_STATUS"],
+    companyHrmType: json["COMPANY_HRM_TYPE"],
+    parentId: json["PARENT_ID"],
+    parentType: json["PARENT_TYPE"],
+    sponserId: json["SPONSER_ID"],
+    upperId: json["UPPER_ID"],
+    startDate: json["START_DATE"],
+    branchViewPassword: json["BRANCH_VIEW_PASSWORD"],
+    categoryId: json["CATEGORY_ID"],
+    branchKycStatus: json["BRANCH_KYC_STATUS"],
+    sponserName: json["SPONSER_NAME"],
+    branchPhoto: json["BRANCH_PHOTO"],
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['BRANCH_ID'] = this.bRANCHID;
-    data['FIRM_ID'] = this.fIRMID;
-    data['BRANCH_NAME'] = this.bRANCHNAME;
-    data['BRANCH_CODE'] = this.bRANCHCODE;
-    data['BRANCH_ADDRESS'] = this.bRANCHADDRESS;
-    data['BRANCH_STATE'] = this.bRANCHSTATE;
-    data['BRANCH_CITY'] = this.bRANCHCITY;
-    data['BRANCH_CONTACT'] = this.bRANCHCONTACT;
-    data['BRANCH_PHONE'] = this.bRANCHPHONE;
-    data['BRANCH_EMAIL'] = this.bRANCHEMAIL;
-    data['BRANCH_TARGET'] = this.bRANCHTARGET;
-    data['BRANCH_CREATED'] = this.bRANCHCREATED;
-    data['BRANCH_TT'] = this.bRANCHTT;
-    data['BRANCH_USERNAME'] = this.bRANCHUSERNAME;
-    data['BRANCH_PASSWORD'] = this.bRANCHPASSWORD;
-    data['BRANCH_STATUS'] = this.bRANCHSTATUS;
-    data['COMPANY_HRM_TYPE'] = this.cOMPANYHRMTYPE;
-    data['PARENT_ID'] = this.pARENTID;
-    data['PARENT_TYPE'] = this.pARENTTYPE;
-    data['SPONSER_ID'] = this.sPONSERID;
-    data['UPPER_ID'] = this.uPPERID;
-    data['START_DATE'] = this.sTARTDATE;
-    data['BRANCH_VIEW_PASSWORD'] = this.bRANCHVIEWPASSWORD;
-    data['CATEGORY_ID'] = this.cATEGORYID;
-    data['BRANCH_KYC_STATUS'] = this.bRANCHKYCSTATUS;
-    data['SPONSER_NAME'] = this.sPONSERNAME;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "BRANCH_ID": branchId,
+    "FIRM_ID": firmId,
+    "BRANCH_NAME": branchName,
+    "BRANCH_CODE": branchCode,
+    "BRANCH_ADDRESS": branchAddress,
+    "BRANCH_STATE": branchState,
+    "BRANCH_CITY": branchCity,
+    "BRANCH_CONTACT": branchContact,
+    "BRANCH_PHONE": branchPhone,
+    "BRANCH_EMAIL": branchEmail,
+    "BRANCH_TARGET": branchTarget,
+    "BRANCH_CREATED": branchCreated,
+    "BRANCH_TT": branchTt!.toIso8601String(),
+    "BRANCH_USERNAME": branchUsername,
+    "BRANCH_PASSWORD": branchPassword,
+    "BRANCH_STATUS": branchStatus,
+    "COMPANY_HRM_TYPE": companyHrmType,
+    "PARENT_ID": parentId,
+    "PARENT_TYPE": parentType,
+    "SPONSER_ID": sponserId,
+    "UPPER_ID": upperId,
+    "START_DATE": startDate,
+    "BRANCH_VIEW_PASSWORD": branchViewPassword,
+    "CATEGORY_ID": categoryId,
+    "BRANCH_KYC_STATUS": branchKycStatus,
+    "SPONSER_NAME": sponserName,
+    "BRANCH_PHOTO": branchPhoto,
+  };
 }

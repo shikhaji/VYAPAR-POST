@@ -7,7 +7,7 @@ import 'create_material_color.dart';
 class ThemeUtils {
   static ThemeData get lightTheme {
     return ThemeData(
-        primaryColor: AppColor.primaryColor,
+        primaryColor: AppColor.primaryBlue,
         tabBarTheme: lightTabBarTheme,
         dialogBackgroundColor: AppColor.white,
         scaffoldBackgroundColor: AppColor.white,
@@ -26,7 +26,7 @@ class ThemeUtils {
     return BottomNavigationBarThemeData(
       elevation: 10,
       backgroundColor: AppColor.white,
-      selectedItemColor: AppColor.primaryColor,
+      selectedItemColor: AppColor.primaryBlue,
       unselectedItemColor: AppColor.grey,
       selectedLabelStyle:
       AppTextStyle.greySubTitle.copyWith(fontWeight: FontWeight.w700),

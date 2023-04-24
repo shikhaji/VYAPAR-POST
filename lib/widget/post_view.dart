@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vyapar_post/utils/app_color.dart';
-import 'package:vyapar_post/utils/app_text_style.dart';
-import 'package:vyapar_post/widget/custom_sized_box.dart';
 
 import '../utils/app_asset.dart';
+import '../utils/app_color.dart';
+import '../utils/app_text_style.dart';
+import 'custom_sized_box.dart';
 
 class PostView extends StatefulWidget {
   const PostView({Key? key}) : super(key: key);

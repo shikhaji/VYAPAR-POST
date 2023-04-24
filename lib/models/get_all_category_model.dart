@@ -1,49 +1,60 @@
+// To parse this JSON data, do
+//
+//     final getAllCategoryModel = getAllCategoryModelFromJson(jsonString);
+
+import 'dart:convert';
+
+GetAllCategoryModel getAllCategoryModelFromJson(String str) => GetAllCategoryModel.fromJson(json.decode(str));
+
+String getAllCategoryModelToJson(GetAllCategoryModel data) => json.encode(data.toJson());
+
 class GetAllCategoryModel {
-  int? status;
-  Message? message;
+  GetAllCategoryModel({
+    required this.status,
+    required this.message,
+  });
 
-  GetAllCategoryModel({this.status, this.message});
+  int status;
+  Message message;
 
-  GetAllCategoryModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message =
-    json['message'] != null ? new Message.fromJson(json['message']) : null;
-  }
+  factory GetAllCategoryModel.fromJson(Map<String, dynamic> json) => GetAllCategoryModel(
+    status: json["status"],
+    message: Message.fromJson(json["message"]),
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.message != null) {
-      data['message'] = this.message!.toJson();
-    }
-    return data;
-  }
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "message": message.toJson(),
+  };
 }
 
 class Message {
-  List<GetCategory>? category;
+  Message({
+    required this.category,
+  });
 
-  Message({this.category});
+  List<Category> category;
 
-  Message.fromJson(Map<String, dynamic> json) {
-    if (json['category'] != null) {
-      category = <GetCategory>[];
-      json['category'].forEach((v) {
-        category!.add(new GetCategory.fromJson(v));
-      });
-    }
-  }
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
+    category: List<Category>.from(json["category"].map((x) => Category.fromJson(x))),
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.category != null) {
-      data['category'] = this.category!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "category": List<dynamic>.from(category.map((x) => x.toJson())),
+  };
 }
 
-class GetCategory {
+class Category {
+  Category({
+     this.id,
+     this.vendorId,
+     this.brandName,
+     this.status,
+     this.date,
+     this.brandImage,
+  });
+
   String? id;
   String? vendorId;
   String? brandName;
@@ -51,31 +62,21 @@ class GetCategory {
   String? date;
   String? brandImage;
 
-  GetCategory(
-      {this.id,
-        this.vendorId,
-        this.brandName,
-        this.status,
-        this.date,
-        this.brandImage});
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+    id: json["id"],
+    vendorId: json["vendor_id"],
+    brandName: json["brand_name"],
+    status: json["status"],
+    date: json["date"],
+    brandImage: json["brand_image"],
+  );
 
-  GetCategory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    vendorId = json['vendor_id'];
-    brandName = json['brand_name'];
-    status = json['status'];
-    date = json['date'];
-    brandImage = json['brand_image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['vendor_id'] = this.vendorId;
-    data['brand_name'] = this.brandName;
-    data['status'] = this.status;
-    data['date'] = this.date;
-    data['brand_image'] = this.brandImage;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "vendor_id": vendorId,
+    "brand_name": brandName,
+    "status": status,
+    "date": date,
+    "brand_image": brandImage,
+  };
 }
