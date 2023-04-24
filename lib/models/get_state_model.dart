@@ -10,12 +10,12 @@ String getStateModelToJson(GetStateModel data) => json.encode(data.toJson());
 
 class GetStateModel {
   GetStateModel({
-    required this.status,
-    required this.message,
+    this.status,
+    this.message,
   });
 
-  int status;
-  Message message;
+  int? status;
+  Message? message;
 
   factory GetStateModel.fromJson(Map<String, dynamic> json) => GetStateModel(
     status: json["status"],
@@ -24,7 +24,7 @@ class GetStateModel {
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "message": message.toJson(),
+    "message": message?.toJson(),
   };
 }
 

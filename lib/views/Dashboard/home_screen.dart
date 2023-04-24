@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    child: Row(
                      children: List.generate(getCategoryData.length, (index){
                        return CetegoryList(
-                         image:AppAsset.postImg,
+                         image:"${getCategoryData[index].brandImage}",
                         name: "${getCategoryData[index].brandName}",
                        );
                      }),

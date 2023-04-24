@@ -85,9 +85,6 @@ class ApiService {
         Preferances.setString("Token", responseData.token);
         Loader.hideLoader();
         CommonFunctions.toast("Login Success");
-
-
-
         return responseData;
       } else {
         print("3");
@@ -224,7 +221,7 @@ class ApiService {
     try {
       Loader.showLoader();
       Response response;
-      response = await dio.post(EndPoints.getAllPost);
+      response = await dio.post(EndPoints.getCurrentBalance,data: data);
       print("1");
       if (response.statusCode == 200 ) {
         GetCurrentBalanceModel responseData = GetCurrentBalanceModel.fromJson(response.data);
@@ -281,24 +278,27 @@ class ApiService {
 
   //----------------------------PROFILE CONTANT API-----------------------//
 
-  Future<ProfileContantModel?> profileContant(
-    BuildContext context,{
-    FormData? data,
-
-    }
-    ) async {
+  Future<ProfileContantModel?> profileContant(BuildContext context) async {
     try {
+      String? id = await Preferances.getString("userId");
+      print("id here:---${id}");
+      FormData data() {
+        return FormData.fromMap({
+          "loginid" : id!.replaceAll('"', '').replaceAll('"', '').toString(),
+        });
+      }
     Loader.showLoader();
     Response response;
-    response = await dio.post(EndPoints.profileContant);
+    response = await dio.post(EndPoints.profileContant,data: data());
     print("1");
+    print("responce:===${response.data}");
 
     if (response.statusCode == 200 ) {
       print("2");
       ProfileContantModel responseData = ProfileContantModel.fromJson(response.data);
 
     Loader.hideLoader();
-    print("response data: ${responseData}");
+    print("GET PROFILE DATA: ${responseData}");
     return responseData;
     } else {
     print("3");
@@ -525,6 +525,36 @@ class ApiService {
     return null;
   }
 
+  Future addPost(
+      BuildContext context, {
+        FormData? data,
+      }) async {
+    try {
+      Loader.showLoader();
+      Response response;
+      response = await dio.post(EndPoints.addPost,
 
+          data: data);
+
+      if (response.statusCode == 200) {
+        Loader.hideLoader();
+        Fluttertoast.showToast(
+          msg: 'Post upload Successfully...',
+          backgroundColor: Colors.grey,
+        );
+        Navigator.pushNamed(context, Routs.mainHomeScreen,arguments: SendArguments(bottomIndex: 0));
+
+        debugPrint('responseData ----- > ${response.data}');
+        return response.data;
+      } else {
+        Loader.hideLoader();
+        throw Exception(response.data);
+      }
+    } on DioError catch (e) {
+      Loader.hideLoader();
+      debugPrint('Dio E  $e');
+      throw e.error;
+    }
+  }
 }
 

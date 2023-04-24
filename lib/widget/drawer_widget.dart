@@ -23,35 +23,19 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  late String loginId ;
   Profile? getProfileData;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    ProfileContant();
-  }
-  Future<void> ProfileContant() async {
-    String? id = await Preferances.getString("userId");
-    setState(() {
-      loginId = id!;
-    });
-    FormData data() {
-      print(id!.replaceAll('"', '').replaceAll('"', '').toString());
-      return FormData.fromMap({
-        "loginid" : id!.replaceAll('"', '').replaceAll('"', '').toString(),
-      });
-    }
-
-    ApiService().profileContant(context,data:data()).then((value) {
+    ApiService().profileContant(context).then((value) {
       setState(() {
-        getProfileData = value!.message!.profile;
+        getProfileData = value?.message?.profile;
       });
     }
     );
-
-
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -188,12 +172,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 //         ))),
                 ScreenUtil().setVerticalSpacing(10),
                 Text(
-                  getProfileData!.bRANCHNAME!,
+                 "${getProfileData?.branchName ?? ""}",
                   style: AppTextStyle.appBarTextTitle
                       .copyWith(color: AppColor.white),
                 ),
                 Text(
-                    getProfileData!.bRANCHEMAIL!,
+                    "${getProfileData?.branchEmail ?? ""}",
                   style: AppTextStyle.lable.copyWith(color: AppColor.white),
                 )
               ],

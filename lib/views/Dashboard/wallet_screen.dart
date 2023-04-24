@@ -51,6 +51,7 @@ class _WalletScreenState extends State<WalletScreen> {
       setState(() {
         balance = value!.balance;
       });
+      print("balance = ${balance}");
     });
 
 

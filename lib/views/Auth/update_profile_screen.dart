@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:vyapar_post/services/shared_preferences.dart';
 import 'package:vyapar_post/utils/validation_mixin.dart';
 
+import '../../models/city_model.dart';
+import '../../models/state_model.dart';
 import '../../routs/app_routs.dart';
 import '../../routs/arguments.dart';
 import '../../services/api_services.dart';
+import '../../utils/app_sizes.dart';
 import '../../utils/app_text.dart';
 import '../../utils/app_text_style.dart';
 import '../../widget/custom_sized_box.dart';
@@ -34,6 +37,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> with Validati
   TextEditingController _businessaddress = TextEditingController();
   TextEditingController _businesscategory = TextEditingController();
   TextEditingController _emailid = TextEditingController();
+  StateModel stateModel=StateModel();
+  CityModel cityModel=CityModel();
   bool obscurePassword = true;
   late String loginId ;
   final _formKey = GlobalKey<FormState>();
@@ -145,9 +150,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> with Validati
 
 
                 }),
+            SizedBoxH10(),
             SizedBoxH28(),
             SizedBoxH28(),
-
 
           ],
         ),
